@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import LoadingBar from "react-top-loading-bar";
+import Navbar from "./components/Navbar";
+import News from "./components/News";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      progress: 0,
+    };
+  }
+  setProgress = (progress) => {
+    this.setState({ progress: progress });
+  };
+  render() {
+    return (
+      <div>
+        <LoadingBar
+          color="#f11946"
+          progress={this.state.progress}
+          onLoaderFinished={() => this.setProgress(0)}
+          height={4}
+        />
+        <Navbar />
+        <News setProgress={this.setProgress} />
+      </div>
+    );
+  }
 }
-
-export default App;
